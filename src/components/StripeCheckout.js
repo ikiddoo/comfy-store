@@ -62,7 +62,7 @@ const CheckoutForm = () => {
         JSON.stringify({ cart, shipping_fee, total_amount })
       );
       // get client secret key
-      console.log(data);
+      console.log('CLIENT SECRET KEY: ', data);
       // set client secret key
       setClientSecret(data.data.clientSecret);
     } catch (error) {
@@ -127,7 +127,11 @@ const CheckoutForm = () => {
       }
       <form id='payment-form' onSubmit={handleSubmit}>
         {/* card payment form */}
-        <CardElement id='card-element' options={cardStyle} onChange={handleChange} />
+        {
+          clientSecret && (
+            <CardElement id='card-element' options={cardStyle} onChange={handleChange} />
+          )
+        }
         {/* card payment button */}
         <button disabled={processing || disabled || succeeded} id='submit'>
           <span id='button-text'>

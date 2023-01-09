@@ -25,8 +25,11 @@ exports.handler = async function (event, context) {
             })
             return {
                 statusCode: 200,
+                headers: {
+                    "access-control-allow-origin": "*",
+                },
                 // body: JSON.stringify(cart) // stringify cart
-                body: JSON.stringify({ clientSecret: paymentIntent.client_secret }) // send client secret to StripeCheckout
+                body: JSON.stringify({ clientSecret: paymentIntent.client_secret }), // send client secret to StripeCheckout
             }
         } catch (error) {
             // return server error on error exception
